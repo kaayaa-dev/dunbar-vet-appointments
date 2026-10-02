@@ -8,7 +8,7 @@
 
 | A2-01 | Manage client records | Create, view, search clients | Implemented |
 
-| A2-02 | Manage animal records | Link animals to clients | Planned |
+| A2-02 | Manage animal records | Link animals to clients | Implemented |
 
 | A2-03 | Manage property records | Property + locality records | Implemented |
 
