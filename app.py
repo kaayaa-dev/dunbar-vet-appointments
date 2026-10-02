@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 
+import config
 import db
 
 app = Flask(__name__)
+app.secret_key = config.SECRET_KEY
+
 db.init_db()
 
 
@@ -48,4 +51,4 @@ def new_client():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=config.FLASK_DEBUG)
