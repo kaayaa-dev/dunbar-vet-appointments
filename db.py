@@ -17,16 +17,15 @@ def get_connection():
 
 def init_db():
     conn = get_connection()
-    conn.execute(
-        """
-        CREATE TABLE IF NOT EXISTS clients (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            phone TEXT NOT NULL,
-            email TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-        """
-    )
+    conn.execute("""CREATE TABLE IF NOT EXISTS clients (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL, phone TEXT NOT NULL,
+        email TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)""")
+    conn.execute("""CREATE TABLE IF NOT EXISTS properties (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        client_id INTEGER NOT NULL REFERENCES clients(id),
+        address TEXT NOT NULL,
+        property_type TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)""")
     conn.commit()
     conn.close()

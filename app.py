@@ -1,11 +1,10 @@
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, url_for
 
 import config
 import db
 
 app = Flask(__name__)
 app.secret_key = config.SECRET_KEY
-
 db.init_db()
 
 
@@ -16,17 +15,17 @@ def index():
 
 @app.route("/clients")
 def list_clients():
-    keyword = request.args.get("q", "").strip()
+    q = request.args.get("q", "").strip()
     conn = db.get_connection()
-    if keyword:
-        clients = conn.execute(
-            "SELECT * FROM clients WHERE name LIKE ? ORDER BY id DESC",
-            (f"%{keyword}%",),
+    if q:
+        rows = conn.execute(
+            "SELECT * FROM clients WHERE name LIKE ? OR phone LIKE ? ORDER BY id DESC",
+            (f"%{q}%", f"%{q}%"),
         ).fetchall()
     else:
-        clients = conn.execute("SELECT * FROM clients ORDER BY id DESC").fetchall()
+        rows = conn.execute("SELECT * FROM clients ORDER BY id DESC").fetchall()
     conn.close()
-    return render_template("clients.html", clients=clients, keyword=keyword)
+    return render_template("clients.html", clients=rows, q=q)
 
 
 @app.route("/clients/new", methods=["GET", "POST"])
@@ -46,8 +45,44 @@ def new_client():
             )
             conn.commit()
             conn.close()
+            flash("Client added.")
             return redirect(url_for("list_clients"))
     return render_template("client_form.html", error=error)
+
+
+@app.route("/properties")
+def list_properties():
+    conn = db.get_connection()
+    rows = conn.execute(
+        """SELECT p.*, c.name AS client_name FROM properties p
+           JOIN clients c ON c.id = p.client_id ORDER BY p.id DESC"""
+    ).fetchall()
+    conn.close()
+    return render_template("properties.html", properties=rows)
+
+
+@app.route("/properties/new", methods=["GET", "POST"])
+def new_property():
+    conn = db.get_connection()
+    clients = conn.execute("SELECT id, name FROM clients ORDER BY name").fetchall()
+    error = None
+    if request.method == "POST":
+        client_id = request.form.get("client_id", "").strip()
+        address = request.form.get("address", "").strip()
+        property_type = request.form.get("property_type", "").strip()
+        if not client_id or not address:
+            error = "Client and address are required."
+        else:
+            conn.execute(
+                "INSERT INTO properties (client_id, address, property_type) VALUES (?, ?, ?)",
+                (client_id, address, property_type),
+            )
+            conn.commit()
+            conn.close()
+            flash("Property added.")
+            return redirect(url_for("list_properties"))
+    conn.close()
+    return render_template("property_form.html", clients=clients, error=error)
 
 
 if __name__ == "__main__":
