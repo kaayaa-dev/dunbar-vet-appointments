@@ -34,5 +34,14 @@ def init_db():
         species TEXT NOT NULL,
         breed TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)""")
+    conn.execute("""CREATE TABLE IF NOT EXISTS appointments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        animal_id INTEGER NOT NULL REFERENCES animals(id),
+        appointment_time TEXT NOT NULL,
+        duration_minutes INTEGER NOT NULL,
+        visit_type TEXT NOT NULL DEFAULT 'clinic',
+        room TEXT,
+        status TEXT NOT NULL DEFAULT 'booked',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)""")
     conn.commit()
     conn.close()

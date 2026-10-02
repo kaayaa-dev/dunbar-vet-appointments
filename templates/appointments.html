@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appointments - Dunbar Vet Clinic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Appointments</h1>
+    <p><a href="{{ url_for('new_appointment') }}">Book appointment</a> | <a href="{{ url_for('index') }}">Home</a></p>
+    <table>
+        <tr><th>ID</th><th>Time</th><th>Duration</th><th>Type</th><th>Room</th><th>Animal</th><th>Owner</th><th>Status</th></tr>
+        {% for a in appointments %}
+        <tr>
+            <td>{{ a.id }}</td>
+            <td>{{ a.appointment_time }}</td>
+            <td>{{ a.duration_minutes }} min</td>
+            <td>{{ a.visit_type }}</td>
+            <td>{{ a.room or '-' }}</td>
+            <td>{{ a.animal_name }}</td>
+            <td>{{ a.client_name }}</td>
+            <td>{{ a.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
