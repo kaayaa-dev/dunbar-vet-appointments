@@ -1,7 +1,12 @@
+import os
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent / "clinic.db"
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DB_PATH = Path(os.getenv("DATABASE_PATH", "clinic.db"))
 
 
 def get_connection():
