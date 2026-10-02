@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Animal - Dunbar Vet Clinic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Add Animal</h1>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <form method="post">
+        <p>
+            <label>Owner:</label>
+            <select name="client_id">
+                {% for c in clients %}
+                <option value="{{ c.id }}">{{ c.name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p><label>Name: <input name="name"></label></p>
+        <p><label>Species: <input name="species" placeholder="dog / cat / horse"></label></p>
+        <p><label>Breed: <input name="breed"></label></p>
+        <p><button type="submit">Save</button></p>
+    </form>
+    <p><a href="{{ url_for('list_animals') }}">Back to animals</a></p>
+</body>
+</html>

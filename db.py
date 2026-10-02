@@ -27,5 +27,12 @@ def init_db():
         address TEXT NOT NULL,
         property_type TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)""")
+    conn.execute("""CREATE TABLE IF NOT EXISTS animals (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        client_id INTEGER NOT NULL REFERENCES clients(id),
+        name TEXT NOT NULL,
+        species TEXT NOT NULL,
+        breed TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)""")
     conn.commit()
     conn.close()
