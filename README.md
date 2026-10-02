@@ -7,6 +7,7 @@ ISYS3001 Managing Software Development (Assessment 2).
 ## Features
 
 - Client records management: add, list and search clients
+- Property records management: add properties and list them per client
 
 ## Tech Stack
 
