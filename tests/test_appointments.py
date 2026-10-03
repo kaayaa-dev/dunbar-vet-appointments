@@ -68,3 +68,34 @@ def test_farm_visit_requires_60_minutes(client):
         },
     )
     assert b"at least 60 minutes" in resp.data
+
+def test_cancel_appointment_keeps_history(client):
+    _make_animal(client)
+    client.post(
+        "/appointments/new",
+        data={
+            "animal_id": "1",
+            "appointment_time": "2026-10-06T09:00",
+            "duration_minutes": "30",
+            "visit_type": "clinic",
+            "room": "R1",
+        },
+    )
+    client.post("/appointments/1/cancel", follow_redirects=True)
+    resp = client.get("/appointments")
+    assert b"cancelled" in resp.data
+
+
+def test_cancelled_room_can_be_rebooked(client):
+    _make_animal(client)
+    data = {
+        "animal_id": "1",
+        "appointment_time": "2026-10-06T09:00",
+        "duration_minutes": "30",
+        "visit_type": "clinic",
+        "room": "R1",
+    }
+    client.post("/appointments/new", data=data)
+    client.post("/appointments/1/cancel")
+    resp = client.post("/appointments/new", data=data)
+    assert b"already booked" not in resp.data

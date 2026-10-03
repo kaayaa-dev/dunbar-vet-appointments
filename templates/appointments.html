@@ -8,7 +8,7 @@
     <h1>Appointments</h1>
     <p><a href="{{ url_for('new_appointment') }}">Book appointment</a> | <a href="{{ url_for('index') }}">Home</a></p>
     <table>
-        <tr><th>ID</th><th>Time</th><th>Duration</th><th>Type</th><th>Room</th><th>Animal</th><th>Owner</th><th>Status</th></tr>
+        <tr><th>ID</th><th>Time</th><th>Duration</th><th>Type</th><th>Room</th><th>Animal</th><th>Owner</th><th>Status</th><th>Action</th></tr>
         {% for a in appointments %}
         <tr>
             <td>{{ a.id }}</td>
@@ -19,6 +19,13 @@
             <td>{{ a.animal_name }}</td>
             <td>{{ a.client_name }}</td>
             <td>{{ a.status }}</td>
+            <td>
+                {% if a.status == 'booked' %}
+                <form method="post" action="{{ url_for('cancel_appointment', appointment_id=a.id) }}">
+                    <button type="submit">Cancel</button>
+                </form>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </table>
