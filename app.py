@@ -197,6 +197,17 @@ def new_appointment():
     conn.close()
     return render_template("appointment_form.html", animals=animals, error=error)
 
+@app.route("/appointments/<int:appointment_id>/cancel", methods=["POST"])
+def cancel_appointment(appointment_id):
+    conn = db.get_connection()
+    conn.execute(
+        "UPDATE appointments SET status = 'cancelled' WHERE id = ?",
+        (appointment_id,),
+    )
+    conn.commit()
+    conn.close()
+    flash("Appointment cancelled.")
+    return redirect(url_for("list_appointments"))
 
 if __name__ == "__main__":
     app.run(debug=config.FLASK_DEBUG)
