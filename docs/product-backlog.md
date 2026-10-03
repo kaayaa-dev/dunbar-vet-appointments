@@ -14,9 +14,9 @@
 
 | A2-04 | Local data persistence | SQLite, survives restart | Implemented |
 
-| A2-05 | Book in-clinic consultation | Validate room/time conflicts | Planned |
+| A2-05 | Book in-clinic consultation | Validate room/time conflicts | Implemented |
 
-| A2-06 | Book farm visit | Duration >= 1 hour validation | Planned |
+| A2-06 | Book farm visit | Duration >= 1 hour validation | Implemented |
 
 | A2-07 | Change/cancel appointments | History retained after change | Planned |
 
