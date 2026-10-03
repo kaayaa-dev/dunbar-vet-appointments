@@ -9,8 +9,9 @@ ISYS3001 Managing Software Development (Assessment 2).
 - Client records management: add, list and search clients
 - Property records management: add properties and list them per client
 - Animal records management: register animals and link them to clients
-- Appointment booking: clinic consultations with room/time conflict
-  validation, and farm visits with minimum 60-minute duration
+- Appointment booking and cancellation: clinic consultations with
+  room/time conflict validation, farm visits (min 60 minutes),
+  cancellation keeps history and releases the room
 
 ## Tech Stack
 

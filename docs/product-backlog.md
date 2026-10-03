@@ -18,5 +18,5 @@
 
 | A2-06 | Book farm visit | Duration >= 1 hour validation | Implemented |
 
-| A2-07 | Change/cancel appointments | History retained after change | Planned |
+| A2-07 | Change/cancel appointments | History retained after change | Implemented |
 
