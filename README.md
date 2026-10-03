@@ -6,7 +6,7 @@ ISYS3001 Managing Software Development (Assessment 2).
 
 ## Features
 
-- Client records management: add, list and search clients
+- Client records management: add, list and search clients by name or phone
 - Property records management: add properties and list them per client
 - Animal records management: register animals and link them to clients
 - Appointment booking and cancellation: clinic consultations with
