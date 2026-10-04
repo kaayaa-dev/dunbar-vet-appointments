@@ -1,2 +1,3 @@
 [lint]
+# DTZ007: naive datetimes are acceptable — this app runs locally in a single time zone
 ignore = ["DTZ007"]
