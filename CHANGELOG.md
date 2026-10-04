@@ -8,6 +8,18 @@ This project uses Semantic Versioning: vMAJOR.MINOR.PATCH.
 
 
 
+\## \[v1.0.2] - 2026-10-04
+
+
+
+\### Fixed
+
+\- Home/Back links on the clients list and client form pages now point to valid targets (previously href=" "). Found during post-release verification; fixed via fix/home-links with a regression test.
+
+
+
+
+
 \## \[v1.0.1] - 2026-10-04
 
 
