@@ -12,3 +12,12 @@ def test_homepage_has_navigation_links(tmp_path, monkeypatch):
     assert b"/animals" in resp.data
     assert b"/properties" in resp.data
     assert b"/appointments" in resp.data
+
+def test_list_pages_home_link_works(tmp_path, monkeypatch):
+    monkeypatch.setattr(db, "DB_PATH", tmp_path / "test.db")
+    db.init_db()
+    client = flask_app.app.test_client()
+    for page in ["/clients", "/properties", "/animals", "/appointments"]:
+        resp = client.get(page)
+        assert resp.status_code == 200
+        assert b'href="/"' in resp.data

@@ -3,10 +3,10 @@
 <head><title>New Client - Dunbar Vet</title></head>
 <body>
   <h1>Add New Client</h1>
-  <p><a href=" ">Back to Clients</a ></p >
+  <p><a href="/clients">Back to Clients</a></p>
 
   {% if error %}
-  <p style="color: red;">{{ error }}</p >
+  <p style="color: red;">{{ error }}</p>
   {% endif %}
 
   <form method="post" action="/clients/new">
@@ -14,17 +14,17 @@
       <label>Name *<br>
         <input type="text" name="name" required>
       </label>
-    </p >
+    </p>
     <p>
       <label>Phone *<br>
         <input type="text" name="phone" required>
       </label>
-    </p >
+    </p>
     <p>
       <label>Email<br>
         <input type="email" name="email">
       </label>
-    </p >
+    </p>
     <button type="submit">Save Client</button>
   </form>
 </body>
