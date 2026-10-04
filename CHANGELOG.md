@@ -8,6 +8,16 @@ This project uses Semantic Versioning: vMAJOR.MINOR.PATCH.
 
 
 
+\## \[v1.0.1] - 2026-10-04
+
+
+
+\### Fixed
+
+\- Homepage now includes navigation links to Clients, Properties, Animals and Appointments pages. Defect found during clean-checkout verification of v1.0.0; fixed via fix/homepage-navigation with a regression test (tests/test\_index.py).
+
+
+
 \## \[v1.0.0] - 2026-10-04
 
 
